@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django.db import models
 from .Enums.userType import UserType
 import uuid
@@ -21,6 +20,9 @@ class User(models.Model):
     wallet_balance = models.FloatField()
     created_at = models.DateTimeField(auto_now= True)
     updated_at = models.DateTimeField(auto_now_add= True)
+    
+    class Meta:
+        ordering = ['created_at']
     
     def __str__(self) :
         return self.id
