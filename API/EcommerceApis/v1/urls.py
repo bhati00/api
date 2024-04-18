@@ -3,7 +3,8 @@ from . import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
-    path('users/', views.UserView.as_view(), name= "User-view-create"),
+    path('create-user/', views.UserCreate.as_view(), name= "create"),
+    path('user/<str:pk>/', views.UserRetrieveUpdateDestroy.as_view(), name= "read-update-delete"),
     
     # our api docs 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

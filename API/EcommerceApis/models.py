@@ -1,5 +1,7 @@
 from django.db import models
 from .Enums.userType import UserType
+from django.contrib.auth.hashers import make_password
+
 import uuid
 
 
@@ -20,6 +22,11 @@ class User(models.Model):
     wallet_balance = models.FloatField()
     created_at = models.DateTimeField(auto_now= True)
     updated_at = models.DateTimeField(auto_now_add= True)
+    
+    def save(self, *args, **kwargs):
+        if self._state.adding :
+            self.password = make_password(self.password)
+        super(User, self).save(*args, **kwargs)
     
     class Meta:
         ordering = ['created_at']
