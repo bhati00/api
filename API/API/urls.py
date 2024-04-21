@@ -19,4 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include("users.v1.urls")),
+    path('',include("authentication.urls"))
 ]

@@ -35,13 +35,19 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'rest_framework',
+    'rest_auth',
+    'rest_framework.authtoken',
     'django.contrib.auth',
+    'allauth',
+    'allauth.account',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_spectacular',
-    'users'
+    'users',
+    'authentication'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +61,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'API.urls'
+SITE_ID = 1
 
 TEMPLATES = [
     {
@@ -131,10 +138,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASS':["rest_framework.authentication.TokenAuthentication",]
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Users API',
+    'TITLE': 'Ecommerce APIs',
     'DESCRIPTION': 'A Practive Project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
