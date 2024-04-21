@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_spectacular',
-    'EcommerceApis'
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -134,7 +134,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Ecommerce API',
+    'TITLE': 'Users API',
     'DESCRIPTION': 'A Practive Project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,

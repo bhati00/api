@@ -18,5 +18,5 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include("EcommerceApis.v1.urls")),
+    path('', include("users.v1.urls")),
 ]
