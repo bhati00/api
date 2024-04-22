@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'rest_framework',
     'rest_auth',
+    'dj_rest_auth',
     'rest_framework.authtoken',
     'django.contrib.auth',
     'allauth',
@@ -138,7 +139,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASS':["rest_framework.authentication.TokenAuthentication",]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'my-app-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
 }
 
 SPECTACULAR_SETTINGS = {
