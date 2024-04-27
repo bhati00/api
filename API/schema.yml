@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
-  title: Users API
+  title: Ecommerce APIs
   version: 1.0.0
   description: A Practive Project
 paths:
-  /create-user/:
+  /users/register:
     post:
-      operationId: create_user_create
+      operationId: users_register_create
       tags:
-      - create-user
+      - users
       requestBody:
         content:
           application/json:
@@ -22,8 +22,8 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       security:
-      - cookieAuth: []
-      - basicAuth: []
+      - jwtHeaderAuth: []
+      - jwtCookieAuth: []
       - {}
       responses:
         '201':
@@ -32,148 +32,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: ''
-  /user/{id}/:
-    get:
-      operationId: user_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - user
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    put:
-      operationId: user_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    patch:
-      operationId: user_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    delete:
-      operationId: user_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - user
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '204':
-          description: No response body
 components:
   schemas:
-    PatchedUser:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        password:
-          type: string
-          writeOnly: true
-        user_type:
-          allOf:
-          - $ref: '#/components/schemas/UserTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        is_active:
-          type: boolean
-        wallet_balance:
-          type: number
-          format: double
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
     User:
       type: object
       properties:
@@ -228,10 +88,11 @@ components:
         * `1` - SELLER
         * `2` - BUYER
   securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-    cookieAuth:
+    jwtCookieAuth:
       type: apiKey
       in: cookie
-      name: sessionid
+      name: my-app-auth
+    jwtHeaderAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

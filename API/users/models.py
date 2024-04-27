@@ -1,3 +1,4 @@
+from random import randint;
 from django.db import models
 from .Enums.userType import UserType
 from django.contrib.auth.hashers import make_password
@@ -15,6 +16,7 @@ class User(models.Model):
     )
     first_name = models.TextField()
     last_name = models.TextField()
+    user_name = models.CharField(default= randint(10000,99999), unique=True, max_length=5)
     email = models.EmailField()
     password = models.TextField()
     user_type = models.IntegerField(choices= UserType.choices(), default= UserType.BUYER)
