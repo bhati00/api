@@ -1,38 +1,23 @@
-from random import randint;
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
-from .Enums.userType import UserType
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.models import User
 import uuid
 
+from .Enums.userType import UserType
 
-# Create your models here.
-class User(models.Model):
-    id = models.UUIDField(
-        primary_key= True,
-        default= uuid.uuid4,
-        unique= True,
-        editable= False
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userProfile")
+    user_guid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False
     )
-    first_name = models.TextField()
-    last_name = models.TextField()
-    user_name = models.CharField(default= randint(10000,99999), unique=True, max_length=5)
-    email = models.EmailField()
-    password = models.TextField()
-    user_type = models.IntegerField(choices= UserType.choices(), default= UserType.BUYER)
-    is_active = models.BooleanField(default= True)
+    user_type = models.IntegerField(choices=UserType.choices(), default=UserType.BUYER)
     wallet_balance = models.FloatField()
-    created_at = models.DateTimeField(auto_now= True)
-    updated_at = models.DateTimeField(auto_now_add= True)
-    
-    def save(self, *args, **kwargs):
-        if self._state.adding :
-            self.password = make_password(self.password)
-        super(User, self).save(*args, **kwargs)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        ordering = ['created_at']
-    
-    def __str__(self) :
-        return self.id
-    
+        ordering = ['created_at' ]  # Corrected the ordering syntax
+
