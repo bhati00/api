@@ -37,14 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'rest_framework',
     'rest_auth',
-    'dj_rest_auth',
     'rest_framework.authtoken',
     'django.contrib.auth',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'corsheaders',
+    'rest_auth.registration',
     'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,20 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_spectacular',
     'users',
-    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "allauth.account.middleware.AccountMiddleware"
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'API.urls'
@@ -155,9 +149,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    
 }
 
 # dj rest auth config
