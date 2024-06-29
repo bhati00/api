@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_auth.registration.views import ConfirmEmailView
+from dj_rest_auth.registration.views import ConfirmEmailView
 from . import views
 
 urlpatterns = [

@@ -2,8 +2,8 @@ from email.policy import default
 import profile
 from pyexpat import model
 from attr import fields
-from rest_auth.serializers import UserDetailsSerializer
-from rest_auth.registration.serializers import RegisterSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
+from dj_rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from django.db import transaction
 from django.contrib.auth.models import User
