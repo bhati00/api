@@ -162,6 +162,7 @@ REST_AUTH = {
     'USE_JWT' : True,
     'JWT_AUTH_COOKIE': "my-token",
     'JWT_AUTH_REFRESH_COOKIE': "my-refresh-token",
+    "JWT_AUTH_HTTPONLY" : False
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -177,6 +178,7 @@ SPECTACULAR_SETTINGS = {
 
 # jwt settings 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=6),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME" : timedelta(weeks=1),
      "SIGNING_KEY": os.getenv("SECRET_KEY")
 }
