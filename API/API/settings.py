@@ -165,8 +165,18 @@ REST_AUTH = {
     'JWT_AUTH_REFRESH_COOKIE': "my-refresh-token",
     "JWT_AUTH_HTTPONLY" : False
 }
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'princebhati00000@gmail.com'
+EMAIL_HOST_PASSWORD = 'hwdz atux dnrc jsxj'
 
 
 SPECTACULAR_SETTINGS = {
