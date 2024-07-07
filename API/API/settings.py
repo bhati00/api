@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'users',
+    # 'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,13 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dj_rest_auth.registration',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'dj_rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-    'dj_rest_auth',
+    # 'dj_rest_auth',
     'drf_spectacular',
 ]
 
@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware'
+    # 'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'API.urls'
@@ -157,13 +157,16 @@ REST_FRAMEWORK = {
 }
 
 # dj rest auth config
-REST_AUTH = {
-    'USER_DETAILS_SERIALIZER': 'users.v1.serializers.UserSerializer',
-    'REGISTER_SERIALIZER': 'users.v1.serializers.CustomRegisterSerializer',
-    'USE_JWT' : True,
-    'JWT_AUTH_COOKIE': "my-token",
-    'JWT_AUTH_REFRESH_COOKIE': "my-refresh-token",
-}
+# REST_AUTH = {
+#     'USER_DETAILS_SERIALIZER': 'users.v1.serializers.UserSerializer',
+#     'REGISTER_SERIALIZER': 'users.v1.serializers.CustomRegisterSerializer',
+#     'USE_JWT' : True,
+#     'JWT_AUTH_COOKIE': "my-token",
+#     'JWT_AUTH_REFRESH_COOKIE': "my-refresh-token",
+#     "JWT_AUTH_HTTPONLY" : False
+# }
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_REQUIRED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
