@@ -1,8 +1,7 @@
 from django.urls import path
-from dj_rest_auth.registration.views import ConfirmEmailView
+from dj_rest_auth.registration.views import VerifyEmailView
 from . import views
 
 urlpatterns = [
-
-    path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
+    path('account-confirm-email/<str:key>/', VerifyEmailView.as_view()),
 ]
