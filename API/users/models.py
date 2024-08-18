@@ -1,13 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
 import uuid
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
 
 from .Enums.userType import UserType
 
+# here i've override django's auth user model 
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
@@ -18,23 +18,21 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
     
     
-
-# class UserProfile(models.Model):
-#     REQUIRED_FIELDS = []
-#     USERNAME_FIELD = "user_guid"
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userProfile")
-#     user_guid = models.UUIDField(
-#         default=uuid.uuid4,
-#         unique=True,
-#         editable=False
-#     )
-#     user_type = models.IntegerField(choices=UserType.choices(), default=UserType.BUYER)
-#     wallet_balance = models.FloatField()
-#     created_at = models.DateTimeField(auto_now=True)
-#     updated_at = models.DateTimeField(auto_now_add=True)
+# creatting one to one mapping with our userprofile
+class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="userProfile")
+    user_guid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False
+    )
+    user_type = models.IntegerField(choices=UserType.choices(), default=UserType.BUYER)
+    wallet_balance = models.FloatField()
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     
-#     class Meta:
-#         ordering = ['created_at' ]  # Corrected the ordering syntax
+    class Meta:
+        ordering = ['created_at' ]  # Corrected the ordering syntax
         
 
 

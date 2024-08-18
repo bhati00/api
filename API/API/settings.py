@@ -168,8 +168,18 @@ SPECTACULAR_SETTINGS = {
 # jwt settings 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=6),
-     "SIGNING_KEY": os.getenv("SECRET_KEY")
+     "SIGNING_KEY": os.getenv("SECRET_KEY"),
+      'AUTH_HEADER_TYPES': ('Bearer')
 }
 
 # django auth model
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# djoser settings
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.v1.serializers.CustomUserCreateSerializer',
+        'user': 'users.v1.serializers.CustomUserCreateSerializer',
+        'current_user': 'users.v1.serializers.CustomUserCreateSerializer',
+    }
+}
