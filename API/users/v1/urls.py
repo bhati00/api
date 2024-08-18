@@ -1,8 +1,8 @@
 from django.urls import path
-from dj_rest_auth.registration.views import ConfirmEmailView
-from . import views
+from django.urls import include, path
 
 urlpatterns = [
-
-    path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
+    path('', include('djoser.urls')),
+    path('', include('djoser.urls.jwt')),
+   
 ]

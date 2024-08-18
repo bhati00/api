@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,14 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'dj_rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'dj_rest_auth',
     'drf_spectacular',
+    'djoser',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +57,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'API.urls'
@@ -151,29 +146,20 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    
 }
 
-# dj rest auth config
-# REST_AUTH = {
-#     'USER_DETAILS_SERIALIZER': 'users.v1.serializers.UserSerializer',
-#     'REGISTER_SERIALIZER': 'users.v1.serializers.CustomRegisterSerializer',
-#     'USE_JWT' : True,
-#     'JWT_AUTH_COOKIE': "my-token",
-#     'JWT_AUTH_REFRESH_COOKIE': "my-refresh-token",
-#     "JWT_AUTH_HTTPONLY" : False
-# }
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_EMAIL_REQUIRED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'princebhati00000@gmail.com'
+EMAIL_HOST_PASSWORD = 'hwdz atux dnrc jsxj'
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Ecommerce APIs',
-    'DESCRIPTION': 'A Practive Project',
+    'DESCRIPTION': 'A Practicle Project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
@@ -182,5 +168,18 @@ SPECTACULAR_SETTINGS = {
 # jwt settings 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=6),
-     "SIGNING_KEY": os.getenv("SECRET_KEY")
+     "SIGNING_KEY": os.getenv("SECRET_KEY"),
+      'AUTH_HEADER_TYPES': ('Bearer')
+}
+
+# django auth model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# djoser settings
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.v1.serializers.CustomUserCreateSerializer',
+        'user': 'users.v1.serializers.CustomUserCreateSerializer',
+        'current_user': 'users.v1.serializers.CustomUserCreateSerializer',
+    }
 }
