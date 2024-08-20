@@ -6,7 +6,7 @@ from django.core import exceptions as django_exceptions
 from rest_framework.settings import api_settings
 
 
-# Serializer for UserProfile model
+# Serializer for registering the user 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
@@ -45,6 +45,7 @@ class CustomUserCreateSerializer(DjoserUserCreateSerializer):
         # Create a temporary UserProfile instance
         profile = UserProfile(user=user, **profile_data)
         # Get the password from the validated data
+        # Get the password from the validated data
         password = attrs.get("password")
         try:
             # Validate the password using Django's built-in validators
@@ -58,3 +59,22 @@ class CustomUserCreateSerializer(DjoserUserCreateSerializer):
         # Add back the UserProfile data after validation
         attrs["userProfile"] = profile_data
         return attrs
+
+# 
+class CustomUserUpdateSerializer(serializers.ModelSerializer):
+    # Include the nested UserProfileSerializer to update related profile data
+    userProfile = UserProfileSerializer()
+
+    class Meta:
+        model = CustomUser
+        # Fields to be serialized during user update
+        fields = ['id', 'email', 'first_name', 'last_name', 'is_active', 'userProfile']
+        # Fields that are read-only, meaning they won't be modified by the user
+        read_only_fields = ['id', 'email']
+
+    def update(self, instance, validated_data):
+        # Handle nested UserProfile update
+        user_profile_data = validated_data.pop('userProfile', None)
+        if user_profile_data:
+            UserProfileSerializer().update(instance.userProfile, user_profile_data)
+        return super().update(instance, validated_data)
