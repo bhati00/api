@@ -179,7 +179,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'users.v1.serializers.CustomUserCreateSerializer',
-        'user': 'users.v1.serializers.CustomUserCreateSerializer',
-        'current_user': 'users.v1.serializers.CustomUserCreateSerializer',
+        'user': 'users.v1.serializers.CustomUserUpdateSerializer',  
+        'current_user': 'users.v1.serializers.CustomUserUpdateSerializer',
     }
 }
